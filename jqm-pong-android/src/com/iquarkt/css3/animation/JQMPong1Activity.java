@@ -2,7 +2,10 @@ package com.iquarkt.css3.animation;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.webkit.ConsoleMessage;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -15,6 +18,14 @@ public class JQMPong1Activity extends Activity
         setContentView(R.layout.main);
         
         mWebView = (WebView) findViewById(R.id.webview);
+        mWebView.setWebChromeClient(new WebChromeClient() {
+        	  public boolean onConsoleMessage(ConsoleMessage cm) {
+        	    Log.d("JQMPong1Activity", cm.message() + " -- From line "
+        	                         + cm.lineNumber() + " of "
+        	                         + cm.sourceId() );
+        	    return true;
+        	  }
+        	});
         mWebView.setWebViewClient(new TravelClient());
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.getSettings().setDomStorageEnabled(true);

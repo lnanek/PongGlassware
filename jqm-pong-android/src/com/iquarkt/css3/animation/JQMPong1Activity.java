@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.WindowManager.LayoutParams;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -15,6 +18,12 @@ public class JQMPong1Activity extends Activity
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+		getWindow().addFlags(LayoutParams.FLAG_KEEP_SCREEN_ON);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().addFlags(
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
         setContentView(R.layout.main);
         
         mWebView = (WebView) findViewById(R.id.webview);
